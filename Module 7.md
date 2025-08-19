@@ -15,14 +15,49 @@ Else
 6.	Return 0
  
 Program:
+```
+#include <stdio.h>
 
-//type your code here
+// Structure declaration
+struct eligible {
+    int age;
+    char name[50];
+};
 
+int main() {
+    int n, i;
 
+    printf("Enter number of persons: ");
+    scanf("%d", &n);
+
+    struct eligible e[n]; // Array of structures
+
+    // Input details for each person
+    for (i = 0; i < n; i++) {
+        printf("\nEnter name of person %d: ", i + 1);
+        scanf("%s", e[i].name);
+
+        printf("Enter age of %s: ", e[i].name);
+        scanf("%d", &e[i].age);
+    }
+
+    // Check eligibility
+    printf("\n--- Vaccine Eligibility Report ---\n");
+    for (i = 0; i < n; i++) {
+        printf("\nName: %s\nAge: %d\n", e[i].name, e[i].age);
+
+        if (e[i].age > 6)
+            printf("Vaccine Eligibility: Yes\n");
+        else
+            printf("Vaccine Eligibility: No\n");
+    }
+
+    return 0;
+}
+```
 Output:
 
-//paste your output here
-
+<img width="1774" height="622" alt="image" src="https://github.com/user-attachments/assets/fc4cb86d-8d5d-4fb4-ae50-0eeb65062e88" />
 
 Result:
 Thus, the program is verified successfully. 
@@ -43,19 +78,41 @@ Algorithm:
 7.	Return 0
  
 Program:
+```
+#include <stdio.h>
 
-//type your code here
+// Step 1: Define structure
+struct numbers {
+    int a, b, sum;
+};
 
+// Function that accepts structure and returns structure
+struct numbers add(struct numbers n) {
+    n.sum = n.a + n.b;   // Calculate sum
+    return n;            // Return structure
+}
 
+int main() {
+    struct numbers n, result;
 
+    // Step 3 & 4: Input values
+    printf("Enter value for a: ");
+    scanf("%d", &n.a);
+    printf("Enter value for b: ");
+    scanf("%d", &n.b);
 
+    // Step 5: Pass structure to function
+    result = add(n);
+
+    // Step 6: Print result
+    printf("Sum of %d and %d is: %d\n", result.a, result.b, result.sum);
+
+    return 0;
+}
+```
 Output:
 
-
-//paste your output here
-
-
-
+<img width="1712" height="715" alt="image" src="https://github.com/user-attachments/assets/cdaf2ef8-afc5-4c62-ac68-d38499581e4f" />
 
 Result:
 Thus, the program is verified successfully
@@ -85,16 +142,45 @@ Use scanf to input the file name into the name array.
 5.	Return 0 to indicate successful program execution.
  
 Program:
+```
+#include <stdio.h>
+#include <stdlib.h>  // for exit()
 
-//type your code here
+int main() {
+    FILE *p;
+    char name[100];
 
+    // Step 4: Input file name
+    printf("Enter the file name: ");
+    scanf("%s", name);
 
+    // Step 5: Notify creation attempt
+    printf("\nCreating file: %s\n", name);
 
+    // Step 6: Open file in write mode
+    p = fopen(name, "w");
+    if (p == NULL) {
+        printf("Error! Could not create the file.\n");
+        exit(1);  // Exit with error
+    }
 
+    // Step 7: Success message
+    printf("File '%s' opened successfully in write mode.\n", name);
+
+    // Step 8: Close file
+    fclose(p);
+
+    // Step 9: Closing message
+    printf("File '%s' closed successfully.\n", name);
+
+    // Step 10: End main
+    return 0;
+}
+```
 Output:
 
 
-//paste your output here
+
 
 
 
