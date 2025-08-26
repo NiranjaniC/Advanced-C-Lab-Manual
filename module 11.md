@@ -12,10 +12,35 @@ Algorithm:
 5.	Call the max_of_four function with the input integers and store the result in the greater variable
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+// Function to find maximum of two integers
+int max(int x, int y) {
+    return (x > y) ? x : y;
+}
+
+// Function to find maximum of four integers
+int max_of_four(int a, int b, int c, int d) {
+    return max(max(a, b), max(c, d));
+}
+
+int main() {
+    int a, b, c, d;
+    
+    // Read input from user
+    scanf("%d\n%d\n%d\n%d", &a, &b, &c, &d);
+    
+    // Call and print result
+    printf("%d\n", max_of_four(a, b, c, d));
+    
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+<img width="1110" height="285" alt="image" src="https://github.com/user-attachments/assets/4a3cf92b-e4a1-45e1-b70a-f75c684221c3" />
+
 
 Result:
 Thus, the program  that create a function to find the greatest number is verified successfully.
@@ -36,10 +61,36 @@ Algorithm:
 7.	Call the calculate_the_max function with input values.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
 
+void calculate_the_maximum(int n, int k) {
+    int max_and = 0, max_or = 0, max_xor = 0;
+
+    for (int a = 1; a <= n; a++) {
+        for (int b = a + 1; b <= n; b++) {
+            int and_val = a & b;
+            int or_val = a | b;
+            int xor_val = a ^ b;
+
+            if (and_val < k && and_val > max_and) max_and = and_val;
+            if (or_val < k && or_val > max_or) max_or = or_val;
+            if (xor_val < k && xor_val > max_xor) max_xor = xor_val;
+        }
+    }
+
+    printf("%d\n%d\n%d\n", max_and, max_or, max_xor);
+}
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+    calculate_the_maximum(n, k);
+    return 0;
+}
+```
 Output:
-//paste your output here
+<img width="1085" height="311" alt="image" src="https://github.com/user-attachments/assets/563dd5b8-2f22-4179-b561-dc0826eef55f" />
 
 Result:
 Thus, the program to print the maximum values for the AND, OR and XOR comparisons
@@ -59,11 +110,65 @@ Algorithm:
 5.	Use a for loop to iterate over the queries.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+#include <stdlib.h>
 
+int** shelves;          // Array of pointers to books per shelf
+int* book_counts;       // Array to store number of books on each shelf
+
+int main() {
+    int total_shelves, total_queries;
+    scanf("%d", &total_shelves);
+    scanf("%d", &total_queries);
+
+    // Allocate memory for shelves
+    shelves = (int**)malloc(total_shelves * sizeof(int*));
+    book_counts = (int*)malloc(total_shelves * sizeof(int));
+    
+    for (int i = 0; i < total_shelves; i++) {
+        shelves[i] = NULL; // Initially, shelves have no books
+        book_counts[i] = 0;
+    }
+
+    for (int i = 0; i < total_queries; i++) {
+        int query_type;
+        scanf("%d", &query_type);
+
+        if (query_type == 1) {
+            int x, y;
+            scanf("%d %d", &x, &y);
+
+            // Add book with y pages to shelf x
+            book_counts[x]++;
+            shelves[x] = (int*)realloc(shelves[x], book_counts[x] * sizeof(int));
+            shelves[x][book_counts[x] - 1] = y;
+
+        } else if (query_type == 2) {
+            int x, y;
+            scanf("%d %d", &x, &y);
+            printf("%d\n", shelves[x][y]);
+
+        } else if (query_type == 3) {
+            int x;
+            scanf("%d", &x);
+            printf("%d\n", book_counts[x]);
+        }
+    }
+
+    // Free memory
+    for (int i = 0; i < total_shelves; i++) {
+        free(shelves[i]);
+    }
+    free(shelves);
+    free(book_counts);
+
+    return 0;
+}
+```
 Output:
-//paste your output here
 
+<img width="1094" height="228" alt="image" src="https://github.com/user-attachments/assets/04aa7577-1971-4cc4-bc6d-f993b3b47427" />
 
 Result:
 Thus, the program to write the logic for the requests is verified successfully.
@@ -86,12 +191,35 @@ Algorithm:
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+#include <stdlib.h>
 
+int main() {
+    int n, sum = 0;
+    scanf("%d", &n);
+
+    // Dynamically allocate memory for the array
+    int *arr = (int *)malloc(n * sizeof(int));
+
+    // Read array elements and calculate sum
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+        sum += arr[i];
+    }
+
+    // Print the sum
+    printf("%d\n", sum);
+
+    // Free the allocated memory
+    free(arr);
+
+    return 0;
+}
+```
 Output:
-//paste your output here
 
- 
+<img width="1091" height="234" alt="image" src="https://github.com/user-attachments/assets/3abb5a15-51e0-4b01-9753-341c6c131fb5" />
 
 
 Result:
@@ -120,12 +248,34 @@ o	If a character is not a space, it may belong to a word. If it's the first non-
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+#include <string.h>
 
+int main() {
+    char sentence[200];
+    int i, count = 0, inWord = 0;
+    printf("Enter a sentence: ");
+    fgets(sentence, sizeof(sentence), stdin); 
+    for (i = 0; sentence[i] != '\0'; i++) {
+        if (sentence[i] != ' ' && sentence[i] != '\n' && sentence[i] != '\t') {
+            if (inWord == 0) {  
+                count++;
+                inWord = 1;
+            }
+        } else {
+            inWord = 0;  
+        }
+    }
+
+    printf("The number of words in the sentence is: %d\n", count);
+
+    return 0;
+}
+```
 Output:
-//paste your output here
 
-
+<img width="1919" height="572" alt="image" src="https://github.com/user-attachments/assets/bf25d74d-e483-4d34-82b3-3ec8daadaf69" />
 
 Result:
 
