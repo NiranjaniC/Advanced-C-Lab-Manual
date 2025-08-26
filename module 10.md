@@ -9,14 +9,31 @@ Algorithm:
 4.	Call the search function and perform other linked list operations as needed.
  
 Program:
+```
+struct Node{
+    int data; 
+    struct Node *next;
+} *head;
 
-//type your code here
+void search(int data)
+{
+    struct Node *temp = head; 
+    int position = 1; 
 
+    while (temp != NULL){
+        if (temp->data == data){
+            printf("item %d found at location %d\n", data, position);
+            return;
+        }
+        temp = temp->next;
+        position++; 
+    }
+    printf("Item not found\n"); 
+}
+```
 Output:
 
-//paste your output here
-
-
+<img width="1094" height="426" alt="image" src="https://github.com/user-attachments/assets/a22dc19a-8481-4eb5-87d0-aac10c202f6f" />
 
 Result:
 Thus, the program to search a given element in the given linked list is verified successfully.
@@ -33,14 +50,33 @@ Algorithm:
 4.	Call the insert function and perform other linked list operations as needed.
  
 Program:
+```
+struct Node{
+    int data; 
+    struct Node *next;
+}*head;
 
-//type your code here
 
+void insert(int data){
+    struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data=data;
+    newnode->next=NULL;
+    if (head==NULL){
+        head=newnode;
+    }
+    else{
+        struct Node *temp=head;
+        while(temp->next !=NULL){
+            temp=temp->next;
+        }
+        temp->next=newnode;
+        return;
+    }
+}
+```
 Output:
+<img width="1095" height="419" alt="image" src="https://github.com/user-attachments/assets/95a2465e-1f72-453b-8ab6-1c3f5b8d6bf2" />
 
-//paste your output here
-
- 
 Result:
 Thus, the program to insert a node in a linked list is verified successfully.
 
@@ -57,13 +93,31 @@ Algorithm:
 4.	Move to the next node by updating the temp pointer to point to the next node (temp = temp->next).
  
 Program:
+```
+struct Node
+{
+    struct Node *prev;
+    struct Node *next;
+    int data;
+}*head;
 
-//type your code here
+void display()
+{
+     struct Node *temp = head;
 
+    while (temp != NULL) {
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+    
+    
+    
+    
+}
+```
 Output:
 
-//paste your output here
-
+<img width="1098" height="406" alt="image" src="https://github.com/user-attachments/assets/26738031-fd6b-4b26-ad50-e9e509f88e24" />
 
 Result:
 Thus, the program to traverse a doubly linked list is verified successfully. 
@@ -82,13 +136,38 @@ Algorithm:
 5.	Set the new node's prev pointer to the last node and update the last node's next pointer to the new node.
  
 Program:
+```
+struct Node
+{
+    struct Node *prev;
+    struct Node *next;
+    float data;
+}*head;
 
-//type your code here
+void insert(float data)
+{
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
 
+    if (!head) {
+        head = newNode;
+        return;
+    }
+
+    struct Node *temp = head;
+    while (temp->next) temp = temp->next;
+
+    temp->next = newNode;
+    newNode->prev = temp;
+    
+    
+    
+}
+```
 Output:
 
-//paste your output here
-
+<img width="1093" height="410" alt="image" src="https://github.com/user-attachments/assets/0fd9bd28-4415-480a-8cad-8c4652e48ef2" />
 
 Result:
 Thus, the program to insert an element in doubly linked list is verified successfully.
@@ -124,16 +203,32 @@ o	If the element is not found in any node, print a message indicating the elemen
 
 
 Program:
-
-//type your code here
-
+```
+struct Node{
+    float data; 
+    struct Node *next;
+}*head;
+void delete()
+{
+    struct Node*temp;
+    if(head==NULL)
+    {
+        printf("List is empty\n");
+    }
+    else
+    {
+        temp=head;
+        head=temp->next;
+        free(temp);
+        printf("Node deleted from the begining ...\n");
+    }
+    
+    
+}
+```
 Output:
 
-//paste your output here
-
-
-
-
+<img width="1360" height="542" alt="image" src="https://github.com/user-attachments/assets/82407171-a3fa-4d6d-9367-f1d1d53ffbd7" />
 
 Result:
 Thus, the function that deletes a given element from a linked list is verified successfully.
