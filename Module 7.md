@@ -18,7 +18,6 @@ Program:
 ```
 #include <stdio.h>
 
-// Structure declaration
 struct eligible {
     int age;
     char name[50];
@@ -30,9 +29,7 @@ int main() {
     printf("Enter number of persons: ");
     scanf("%d", &n);
 
-    struct eligible e[n]; // Array of structures
-
-    // Input details for each person
+    struct eligible e[n]; 
     for (i = 0; i < n; i++) {
         printf("\nEnter name of person %d: ", i + 1);
         scanf("%s", e[i].name);
@@ -41,7 +38,6 @@ int main() {
         scanf("%d", &e[i].age);
     }
 
-    // Check eligibility
     printf("\n--- Vaccine Eligibility Report ---\n");
     for (i = 0; i < n; i++) {
         printf("\nName: %s\nAge: %d\n", e[i].name, e[i].age);
@@ -81,32 +77,24 @@ Program:
 ```
 #include <stdio.h>
 
-// Step 1: Define structure
 struct numbers {
     int a, b, sum;
 };
 
-// Function that accepts structure and returns structure
 struct numbers add(struct numbers n) {
-    n.sum = n.a + n.b;   // Calculate sum
-    return n;            // Return structure
+    n.sum = n.a + n.b;   
+    return n;            
 }
 
 int main() {
     struct numbers n, result;
 
-    // Step 3 & 4: Input values
     printf("Enter value for a: ");
     scanf("%d", &n.a);
     printf("Enter value for b: ");
     scanf("%d", &n.b);
-
-    // Step 5: Pass structure to function
     result = add(n);
-
-    // Step 6: Print result
     printf("Sum of %d and %d is: %d\n", result.a, result.b, result.sum);
-
     return 0;
 }
 ```
@@ -144,53 +132,27 @@ Use scanf to input the file name into the name array.
 Program:
 ```
 #include <stdio.h>
-#include <stdlib.h>  // for exit()
-
 int main() {
-    FILE *p;
-    char name[100];
-
-    // Step 4: Input file name
-    printf("Enter the file name: ");
-    scanf("%s", name);
-
-    // Step 5: Notify creation attempt
-    printf("\nCreating file: %s\n", name);
-
-    // Step 6: Open file in write mode
-    p = fopen(name, "w");
-    if (p == NULL) {
-        printf("Error! Could not create the file.\n");
-        exit(1);  // Exit with error
+    char fileName[100];
+    FILE *file;
+    scanf("%s", fileName);
+    file = fopen(fileName, "w");
+    if (file == NULL) {
+        printf("Error: Unable to create or open %s\n", fileName);
+        return 1;
     }
 
-    // Step 7: Success message
-    printf("File '%s' opened successfully in write mode.\n", name);
-
-    // Step 8: Close file
-    fclose(p);
-
-    // Step 9: Closing message
-    printf("File '%s' closed successfully.\n", name);
-
-    // Step 10: End main
+    printf("%s File Created Successfully\n", fileName);
+    printf("%s File Opened\n", fileName);
+    fclose(file);
+    printf("%s File Closed\n", fileName);
     return 0;
 }
 ```
+
 Output:
 
-
-
-
-
-
-
-
-
-
-
-
-
+<img width="1100" height="293" alt="image" src="https://github.com/user-attachments/assets/71e63fb2-847d-454c-8946-f3a6fb15c17d" />
 
 Result:
 Thus, the program is verified successfully
@@ -218,25 +180,49 @@ Use scanf to input the file name into the name array and the number of strings i
 5.	Return 0 to indicate successful program execution.
  
 Program:
+```
+#include <stdio.h>
+#include <stdlib.h>
 
-//type your code here
+int main() {
+    char fileName[100];
+    FILE *file;
+    int n;
+    char buffer[256];
+    
+    scanf("%s", fileName);
+    file = fopen(fileName, "w");
+    if (file == NULL) {
+        printf("Error: Could not open %s\n", fileName);
+        return 1;
+    }
 
+    
+    
+    scanf("%d", &n);
+    getchar(); 
+    for (int i = 0; i < n; i++) {
+        fgets(buffer, sizeof(buffer), stdin);  
+        fputs(buffer, file);                   
+    }
 
+    printf("%s Opened\n", fileName);
+    printf("Data added Successfully\n");
 
+    
+    fclose(file);
+
+    return 0;
+}
+```
 
 Output:
 
-
-//paste your output here
-
-
-
-
+<img width="1092" height="308" alt="image" src="https://github.com/user-attachments/assets/f9c919cb-2ada-4905-afb0-e8c373385a44" />
 
 
 Result:
 Thus, the program is verified successfully
-
 
 
 Ex No 5 : C PROGRAM TO DISPLAY STUDENT DETAILS USING STRUCTURE
@@ -272,21 +258,43 @@ Algorithm:
 13.End the program by returning 0.
 
 Program:
+```
+#include <stdio.h>
+#include <stdlib.h>
 
-//type your code here
+struct Subject {
+    char name[50];
+    int marks;
+};
 
+int main() {
+    struct Subject *s;  
+    int n, i;
+    printf("Enter the number of subjects: ");
+    scanf("%d", &n);
+    s = (struct Subject *)malloc(n * sizeof(struct Subject));
+    if (s == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1; 
+    }
+    for (i = 0; i < n; i++) {
+        printf("\nEnter name of subject %d: ", i + 1);
+        scanf("%s", s[i].name);
+        printf("Enter marks for %s: ", s[i].name);
+        scanf("%d", &s[i].marks);
+    }
+    printf("\n--- Student Subject Details ---\n");
+    for (i = 0; i < n; i++) {
+        printf("Subject: %s\t Marks: %d\n", s[i].name, s[i].marks);
+    }
+    free(s);
 
-
-
+    return 0;
+}
+```
 Output:
 
-
-//paste your output here
-
-
-
-
-
+<img width="1294" height="750" alt="image" src="https://github.com/user-attachments/assets/67a00875-095a-45f4-90d2-545d4f35c170" />
 
 Result:
 Thus, the program is verified successfully
